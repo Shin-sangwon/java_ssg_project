@@ -23,13 +23,7 @@ public class WiseSaying {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof WiseSaying)) return false;
-        WiseSaying that = (WiseSaying) o;
-        return idx == that.idx && Objects.equals(content, that.content) && Objects.equals(author, that.author);
-    }
+
 
 
 }

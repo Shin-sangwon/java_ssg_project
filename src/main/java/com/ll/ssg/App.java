@@ -17,7 +17,6 @@ public class App {
     }
     void run(){
         System.out.println("== 명언 SSG ==");
-        WiseSaying wiseSaying;
 
         Loop1:
         while(true){
@@ -36,10 +35,10 @@ public class App {
                     list();
                     break;
                 case "삭제" :
-                    remove();
+                    remove(rq);
                     break;
                 case "수정" :
-                    modify();
+                    modify(rq);
                     break;
             }
         }
@@ -56,6 +55,11 @@ public class App {
     }
 
     public void list(){
+        if(al.size() == 0){
+            System.out.println("등록 된 글이 없습니다.");
+            return;
+        }
+
         System.out.println("번호 / 작가 / 명언");
         System.out.println("==================");
         for(int i = al.size()-1; i>=0; i--){
@@ -63,56 +67,61 @@ public class App {
         }
     }
 
-    public void remove(){
+    public void remove(Rq rq){
+
+
+
         if(al.size() == 0){
             System.out.println("삭제 할 글이 없습니다.");
             return;
         }
 
         System.out.println("삭제할 번호를 입력 해 주세요");
-        int removeTmp = Integer.parseInt(sc.nextLine());
-        if(removeTmp <= 0 || removeTmp > al.size()){
-            System.out.printf("%d번 명언은 존재하지 않습니다.\n", removeTmp);
+        int removeIdx = Integer.parseInt(sc.nextLine());
+        WiseSaying removeWiseSaying = findById(removeIdx);
+        if(removeWiseSaying == null){
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", removeIdx);
             return;
         }
 
-        al.remove(removeTmp-1);
-        System.out.printf("%d번 명언이 삭제되었습니다.\n", removeTmp);
+        al.remove(removeWiseSaying);
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", removeIdx);
     }
 
-    public void modify(){
+    public void modify(Rq rq){
         if(al.size() == 0){
             System.out.println("수정 할 글이 없습니다.");
             return;
         }
 
         System.out.println("수정 할 번호를 입력 해 주세요");
-        int modifyTmp = Integer.parseInt(sc.nextLine());
+        int modifyIdx = Integer.parseInt(sc.nextLine());
 
-        WiseSaying searchTmp = null;
-        for(WiseSaying tmp : al){
-            if(tmp.idx == modifyTmp) searchTmp = tmp;
-        }
+        WiseSaying modifyWiseSaying = findById(modifyIdx);
 
-        if(searchTmp == null){
-            System.out.printf("%d번 명언은 존재하지 않습니다.\n", modifyTmp);
+        if(modifyWiseSaying == null){
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", modifyIdx);
             return;
         }
 
-
-
-        System.out.printf("명언(기존) : %s \n", searchTmp.content);
+        System.out.printf("명언(기존) : %s \n", modifyWiseSaying.content);
         System.out.print("명언 : ");
-        String content = sc.nextLine();
-        System.out.printf("작가(기존) : %s \n", searchTmp.author);
+        modifyWiseSaying.content = sc.nextLine();
+        System.out.printf("작가(기존) : %s \n", modifyWiseSaying.author);
         System.out.print("작가 : ");
-        String author = sc.nextLine();
-        searchTmp.content = content;
-        searchTmp.author = author;
-        int idx = searchTmp.idx;
-        al.remove(idx-1);
-        al.add(idx-1, searchTmp);
+        modifyWiseSaying.author = sc.nextLine();
 
+        System.out.printf("%d번 명언이 수정되었습니다.", modifyIdx);
+
+    }
+
+    public WiseSaying findById(int paramId){
+        for(WiseSaying wiseSaying : al){
+            if(wiseSaying.idx == paramId){
+                return wiseSaying;
+            }
+        }
+        return null;
     }
 
 }
