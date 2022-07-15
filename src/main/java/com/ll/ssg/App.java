@@ -10,6 +10,7 @@ public class App {
 
         sc = new Scanner(System.in);
 
+        int idx = 1;
 
         Loop1:
         while(true){
@@ -23,7 +24,7 @@ public class App {
                     String content = sc.nextLine();
                     System.out.print("작가 : ");
                     String author = sc.nextLine();
-                    System.out.println("1번 명언이 등록되었습니다.");
+                    System.out.printf("%d번 명언이 등록되었습니다.\n", idx++);
                     break;
             }
         }
