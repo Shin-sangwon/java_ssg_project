@@ -35,6 +35,18 @@ public class App {
                         System.out.printf("%d / %s / %s\n", al.get(i).idx, al.get(i).author, al.get(i).content);
                     }
                     break;
+                case "삭제" :
+                    System.out.println("삭제할 번호를 입력 해 주세요");
+                    int tmp = sc.nextInt();
+                    if(tmp <= 0 || tmp > al.size()){
+                        System.out.printf("%d번 명언은 존재하지 않습니다.\n", tmp);
+                        break;
+                    }
+
+                    al.remove(tmp-1);
+                    System.out.printf("%d번 명언이 삭제되었습니다.", tmp);
+                    break;
+
 
             }
         }
