@@ -23,6 +23,19 @@ public class WiseSaying {
                 '}';
     }
 
+    public String toJson(){
+        return """
+                {
+                    "idx": %d,
+                    "content": %s ,
+                    "author": %s"
+                }
+                """
+                .stripIndent()
+                .formatted(idx, content, author)
+                .trim();
+    }
+
 
 
 

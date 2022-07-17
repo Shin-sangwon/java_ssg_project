@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class WiseSayingRepository {
     private int idx;
-    private ArrayList<WiseSaying> al;
+    private ArrayList<WiseSaying> wiseSayings;
 
     WiseSayingRepository(){
         idx = 1;
-        al = new ArrayList<>();
+        wiseSayings = new ArrayList<>();
     }
 
 
@@ -18,25 +18,9 @@ public class WiseSayingRepository {
 
         System.out.println("번호 / 작가 / 명언");
         System.out.println("==================");
-        for(int i = al.size()-1; i>=0; i--){
-            System.out.printf("%d / %s / %s\n", al.get(i).idx, al.get(i).author, al.get(i).content);
+        for(int i = wiseSayings.size()-1; i>=0; i--){
+            System.out.printf("%d / %s / %s\n", wiseSayings.get(i).idx, wiseSayings.get(i).author, wiseSayings.get(i).content);
         }
-    }
-
-
-    public WiseSaying findById(int paramId){
-        for(WiseSaying wiseSaying : al){
-            if(wiseSaying.idx == paramId){
-                return wiseSaying;
-            }
-        }
-        return null;
-    }
-
-    public boolean isEmpty(){
-        if(al.size() == 0) return true;
-
-        return false;
     }
 
     public void remove(int removeIdx) {
@@ -46,7 +30,7 @@ public class WiseSayingRepository {
             return;
         }
 
-        al.remove(removeWiseSaying);
+        wiseSayings.remove(removeWiseSaying);
         System.out.printf("%d번 명언이 삭제되었습니다.\n", removeIdx);
     }
 
@@ -71,6 +55,21 @@ public class WiseSayingRepository {
     public void write(String content, String author) {
         System.out.printf("%d번 명언이 등록되었습니다.\n", idx);
         WiseSaying wiseSaying = new WiseSaying(idx++, content, author);
-        al.add(wiseSaying);
+        wiseSayings.add(wiseSaying);
+    }
+
+    public WiseSaying findById(int paramId){
+        for(WiseSaying wiseSaying : wiseSayings){
+            if(wiseSaying.idx == paramId){
+                return wiseSaying;
+            }
+        }
+        return null;
+    }
+
+    public boolean isEmpty(){
+        if(wiseSayings.size() == 0) return true;
+
+        return false;
     }
 }

@@ -30,10 +30,10 @@ public class App {
                     wiseSayingController.list();
                     break;
                 case "삭제" :
-                    wiseSayingController.remove(rq);
+                    wiseSayingController.remove();
                     break;
                 case "수정" :
-                    wiseSayingController.modify(rq);
+                    wiseSayingController.modify();
                     break;
             }
         }

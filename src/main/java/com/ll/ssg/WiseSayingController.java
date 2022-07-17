@@ -33,7 +33,7 @@ public class WiseSayingController {
 
     }
 
-    public void remove(Rq rq){
+    public void remove(){
 
         if(wiseSayingRepository.isEmpty()){
             System.out.println("등록된 글이 없습니다.");
@@ -46,7 +46,7 @@ public class WiseSayingController {
         wiseSayingRepository.remove(removeIdx);
     }
 
-    public void modify(Rq rq){
+    public void modify(){
         if(wiseSayingRepository.isEmpty()){
             System.out.println("등록된 글이 없습니다.");
             return;
