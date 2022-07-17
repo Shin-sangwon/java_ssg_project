@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WiseSayingRepository {
-    private int idx;
+    private int id;
     private ArrayList<WiseSaying> wiseSayings;
+    private WiseSayingTable wiseSayingTable;
 
     WiseSayingRepository(){
-        idx = 1;
+        id = 1;
         wiseSayings = new ArrayList<>();
     }
 
@@ -19,27 +20,27 @@ public class WiseSayingRepository {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("==================");
         for(int i = wiseSayings.size()-1; i>=0; i--){
-            System.out.printf("%d / %s / %s\n", wiseSayings.get(i).idx, wiseSayings.get(i).author, wiseSayings.get(i).content);
+            System.out.printf("%d / %s / %s\n", wiseSayings.get(i).id, wiseSayings.get(i).author, wiseSayings.get(i).content);
         }
     }
 
-    public void remove(int removeIdx) {
-        WiseSaying removeWiseSaying = findById(removeIdx);
+    public void remove(int removeid) {
+        WiseSaying removeWiseSaying = findById(removeid);
         if(removeWiseSaying == null){
-            System.out.printf("%d번 명언은 존재하지 않습니다.\n", removeIdx);
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", removeid);
             return;
         }
 
         wiseSayings.remove(removeWiseSaying);
-        System.out.printf("%d번 명언이 삭제되었습니다.\n", removeIdx);
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", removeid);
     }
 
-    public void modify(int modifyIdx, Scanner sc) {
+    public void modify(int modifyid, Scanner sc) {
         sc = new Scanner(System.in);
-        WiseSaying modifyWiseSaying = findById(modifyIdx);
+        WiseSaying modifyWiseSaying = findById(modifyid);
 
         if(modifyWiseSaying == null){
-            System.out.printf("%d번 명언은 존재하지 않습니다.\n", modifyIdx);
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", modifyid);
             return;
         }
 
@@ -53,14 +54,20 @@ public class WiseSayingRepository {
     }
 
     public void write(String content, String author) {
-        System.out.printf("%d번 명언이 등록되었습니다.\n", idx);
-        WiseSaying wiseSaying = new WiseSaying(idx++, content, author);
+        System.out.printf("%d번 명언이 등록되었습니다.\n", id);
+        WiseSaying wiseSaying = new WiseSaying(id++, content, author);
         wiseSayings.add(wiseSaying);
+    }
+
+    public void build(){
+        WiseSayingTable wiseSayingTable = new WiseSayingTable();
+        wiseSayingTable.dumpToJson();
+
     }
 
     public WiseSaying findById(int paramId){
         for(WiseSaying wiseSaying : wiseSayings){
-            if(wiseSaying.idx == paramId){
+            if(wiseSaying.id == paramId){
                 return wiseSaying;
             }
         }

@@ -41,9 +41,9 @@ public class WiseSayingController {
         }
 
         System.out.println("삭제할 번호를 입력 해 주세요");
-        int removeIdx = Integer.parseInt(sc.nextLine());
+        int removeid = Integer.parseInt(sc.nextLine());
 
-        wiseSayingRepository.remove(removeIdx);
+        wiseSayingRepository.remove(removeid);
     }
 
     public void modify(){
@@ -53,10 +53,14 @@ public class WiseSayingController {
         }
 
         System.out.println("수정 할 번호를 입력 해 주세요");
-        int modifyIdx = Integer.parseInt(sc.nextLine());
+        int modifyid = Integer.parseInt(sc.nextLine());
 
-        wiseSayingRepository.modify(modifyIdx, sc);
+        wiseSayingRepository.modify(modifyid, sc);
 
+    }
+
+    public void build(){
+        wiseSayingRepository.build();
     }
 
 

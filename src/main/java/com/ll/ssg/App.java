@@ -5,9 +5,19 @@ public class App {
 
     Scanner sc;
 
+    private static String mode = "prod";
+
     public App(){
         sc = new Scanner(System.in);
 
+    }
+
+    public static String getDataBaseDir() {
+        return mode + "_data";
+    }
+
+    public static void setMode(String mode){
+        App.mode = mode;
     }
     void run(){
         System.out.println("== 명언 SSG ==");
@@ -35,6 +45,8 @@ public class App {
                 case "수정" :
                     wiseSayingController.modify();
                     break;
+                case "빌드" :
+                    wiseSayingController.build();
             }
         }
         sc.close();
