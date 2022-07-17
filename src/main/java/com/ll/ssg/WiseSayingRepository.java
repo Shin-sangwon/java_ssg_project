@@ -1,28 +1,17 @@
 package com.ll.ssg;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingRepository {
-    private int id;
-    private ArrayList<WiseSaying> wiseSayings;
+
     private WiseSayingTable wiseSayingTable;
 
     WiseSayingRepository(){
-        id = 1;
-        wiseSayings = new ArrayList<>();
+        wiseSayingTable = new WiseSayingTable();
     }
 
-
-
-    public void list() {
-
-        System.out.println("번호 / 작가 / 명언");
-        System.out.println("==================");
-        for(int i = wiseSayings.size()-1; i>=0; i--){
-            System.out.printf("%d / %s / %s\n", wiseSayings.get(i).id, wiseSayings.get(i).author, wiseSayings.get(i).content);
-        }
-    }
 
     public void remove(int removeid) {
         WiseSaying removeWiseSaying = findById(removeid);
@@ -31,7 +20,7 @@ public class WiseSayingRepository {
             return;
         }
 
-        wiseSayings.remove(removeWiseSaying);
+        wiseSayingTable.removeById(removeid);
         System.out.printf("%d번 명언이 삭제되었습니다.\n", removeid);
     }
 
@@ -51,12 +40,16 @@ public class WiseSayingRepository {
         System.out.print("작가 : ");
         modifyWiseSaying.author = sc.nextLine();
 
+        wiseSayingTable.save(modifyid, modifyWiseSaying.content, modifyWiseSaying.author);
+
+    }
+
+    public List<WiseSaying> list(){
+        return wiseSayingTable.findAll();
     }
 
     public void write(String content, String author) {
-        System.out.printf("%d번 명언이 등록되었습니다.\n", id);
-        WiseSaying wiseSaying = new WiseSaying(id++, content, author);
-        wiseSayings.add(wiseSaying);
+        wiseSayingTable.save(content, author);
     }
 
     public void build(){
@@ -65,18 +58,13 @@ public class WiseSayingRepository {
 
     }
 
-    public WiseSaying findById(int paramId){
-        for(WiseSaying wiseSaying : wiseSayings){
-            if(wiseSaying.id == paramId){
-                return wiseSaying;
-            }
-        }
-        return null;
+    public WiseSaying findById(int id){
+        return wiseSayingTable.findById(id);
     }
 
-    public boolean isEmpty(){
-        if(wiseSayings.size() == 0) return true;
+    public boolean isEmpty(int id){
+        if(wiseSayingTable.findById(id) == null) return false;
 
-        return false;
+        return true;
     }
 }

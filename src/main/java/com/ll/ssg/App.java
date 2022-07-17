@@ -16,9 +16,6 @@ public class App {
         return mode + "_data";
     }
 
-    public static void setMode(String mode){
-        App.mode = mode;
-    }
     void run(){
         System.out.println("== 명언 SSG ==");
         WiseSayingController wiseSayingController = new WiseSayingController(sc);
